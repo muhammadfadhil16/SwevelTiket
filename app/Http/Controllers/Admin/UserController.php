@@ -65,16 +65,16 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Cegah admin mengubah username user lain
-        if (auth()->user()->id !== $user->id) {
-            return redirect()->route('users.index')->with('error', 'Anda hanya dapat mengubah data Anda sendiri.');
-        }
-
         $request->validate([
             'name_user' => 'required|string|max:255|unique:users,name_user,' . $user->id . ',id',
             'email_user' => 'required|string|email|max:255|unique:users,email_user,' . $user->id . ',id',
             'role' => 'required|in:Admin,User',
         ]);
+
+        // Hindari admin mengubah role dirinya sendiri agar tidak terkunci dari area admin.
+        if (auth()->id() === $user->id && $request->input('role') !== $user->role) {
+            return redirect()->route('users.index')->with('error', 'Role akun Anda sendiri tidak dapat diubah dari halaman ini.');
+        }
 
         $user->name_user = $request->input('name_user');
         $user->email_user = $request->input('email_user');
