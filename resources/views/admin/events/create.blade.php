@@ -6,7 +6,7 @@
 <div class="flex h-screen bg-gray-100">
     <div class="m-auto w-full max-w-4xl">
         <div class="bg-white rounded-lg shadow p-6">
-            <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Pembuatan Tiket</h1>
+            <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Pembuatan Event</h1>
 
             <!-- Form Pembuatan Event -->
             <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
@@ -14,7 +14,7 @@
 
                 <!-- Nama Event -->
                 <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Event Name</label>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nama Event</label>
                     <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Enter event name"
                         class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('name') @enderror" required>
                     @error('name')
@@ -24,7 +24,7 @@
 
                 <!-- Tanggal Event -->
                 <div class="mb-4">
-                    <label for="date" class="block text-sm font-medium text-gray-700">Event Date</label>
+                    <label for="date" class="block text-sm font-medium text-gray-700">Tanggal Event</label>
                     <input type="date" id="date" name="date" value="{{ old('date') }}" min="{{ date('Y-m-d') }}"
                         class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('date') @enderror" required>
                     @error('date')
@@ -35,7 +35,7 @@
                 <!-- Waktu Mulai dan Berakhir -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="start_time" class="block text-sm font-medium text-gray-700">Start Time</label>
+                        <label for="start_time" class="block text-sm font-medium text-gray-700">Waktu Mulai</label>
                         <input type="time" id="start_time" name="start_time" value="{{ old('start_time') }}"
                             class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('start_time') @enderror" required>
                         @error('start_time')
@@ -44,7 +44,7 @@
                     </div>
 
                     <div>
-                        <label for="end_time" class="block text-sm font-medium text-gray-700">End Time</label>
+                        <label for="end_time" class="block text-sm font-medium text-gray-700">Waktu Selesai/label>
                         <input type="time" id="end_time" name="end_time" value="{{ old('end_time') }}"
                             class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('end_time') @enderror" required>
                         @error('end_time')
@@ -55,7 +55,7 @@
 
                 <!-- Gambar Event -->
                 <div class="mt-4">
-                    <label for="image" class="block text-sm font-medium text-gray-700">Event Image</label>
+                    <label for="image" class="block text-sm font-medium text-gray-700">Poster</label>
                     <input type="file" id="image" name="image"
                         class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('image') @enderror" required>
                     @error('image')
@@ -66,7 +66,7 @@
                 <!-- Lokasi dan Venue -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div>
-                        <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                        <label for="location" class="block text-sm font-medium text-gray-700">Kota</label>
                         <select id="location" name="location"
                             class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('location') @enderror" required>
                             <option value="" selected disabled>-- Select City --</option>
@@ -80,7 +80,7 @@
                     </div>
 
                     <div>
-                        <label for="venue" class="block text-sm font-medium text-gray-700">Venue</label>
+                        <label for="venue" class="block text-sm font-medium text-gray-700">Tempat</label>
                         <input type="text" id="venue" name="venue" value="{{ old('venue') }}" placeholder="Enter event venue"
                             class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('venue') @enderror" required>
                         @error('venue')
@@ -91,7 +91,7 @@
 
                 <!-- Deskripsi -->
                 <div class="mt-4">
-                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Deskripsi</label>
                     <textarea id="description" name="description" rows="3" placeholder="Enter event description (optional)"
                         class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('description') @enderror">{{ old('description') }}</textarea>
                     @error('description')
@@ -112,7 +112,7 @@
                 <!-- Kategori dan Kapasitas -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                     <div>
-                        <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                        <label for="category" class="block text-sm font-medium text-gray-700">Kategori</label>
                         <select id="category" name="category"
                             class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('category') @enderror" required>
                             <option value="" selected disabled>Select category</option>
@@ -127,7 +127,7 @@
                     </div>
 
                     <div>
-                        <label for="capacity" class="block text-sm font-medium text-gray-700">Capacity</label>
+                        <label for="capacity" class="block text-sm font-medium text-gray-700">Kapasitas</label>
                         <input type="number" id="capacity" name="capacity" value="{{ old('capacity') }}" placeholder="Enter event capacity" min="1"
                             class="w-full px-4 py-2.5 mt-2 text-base border border-gray-300 rounded-lg bg-gray-200 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400 @error('capacity') @enderror" required>
                         @error('capacity')

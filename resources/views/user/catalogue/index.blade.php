@@ -111,7 +111,7 @@
 <!-- Banner CTA -->
 <div class="mt-8 mb-5 mx-4 p-6 rounded-lg text-center bg-white shadow-lg relative">
     <!-- Background Image -->
-    <div class="absolute inset-0 bg-cover bg-center rounded-lg" style="background-image: url('{{ asset('assets/img/banner7.png') }}'); opacity: 0.6;"></div>
+    <div class="absolute inset-0 bg-cover bg-center rounded-lg" style="background-image: url('{{ asset('assets/img/banner7.png') }}'); opacity: 0.9;"></div>
 
     <!-- Konten -->
     <div class="relative z-10">

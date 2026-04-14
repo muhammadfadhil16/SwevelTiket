@@ -35,8 +35,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name_user' => 'required|string|max:255|unique:users,name_user',
+            'email_user' => 'required|string|email|max:255|unique:users,email_user',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -63,19 +63,24 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Cari user berdasarkan ID
         $user = User::findOrFail($id);
 
-        // Validasi input
+        // Cegah admin mengubah username user lain
+        if (auth()->user()->id !== $user->id) {
+            return redirect()->route('users.index')->with('error', 'Anda hanya dapat mengubah data Anda sendiri.');
+        }
+
         $request->validate([
-            'role' => 'required|in:Admin,User,Promotor',
+            'name_user' => 'required|string|max:255|unique:users,name_user,' . $user->id . ',id',
+            'email_user' => 'required|string|email|max:255|unique:users,email_user,' . $user->id . ',id',
+            'role' => 'required|in:Admin,User',
         ]);
 
-        // Update data role
-        $user->role = $request->input('role'); // Pastikan nilai role sesuai
-        $user->save(); // Simpan perubahan
+        $user->name_user = $request->input('name_user');
+        $user->email_user = $request->input('email_user');
+        $user->role = $request->input('role');
+        $user->save();
 
-        // Kembali ke halaman sebelumnya dengan pesan sukses
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
@@ -83,9 +88,13 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        // Cegah admin menghapus dirinya sendiri
+        if (auth()->id() == $id) {
+            return redirect()->route('users.index')->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
+        }
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
     }
 }

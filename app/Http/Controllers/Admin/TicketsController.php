@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Tickets;
+use App\Models\Ticket;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -45,7 +45,7 @@ class TicketsController extends Controller
         ]);
 
         $event = Event::findOrFail($request->id_event);
-        $existingTickets = Tickets::where('id_event', $request->id_event)->sum('quantity');
+        $existingTickets = Ticket::where('id_event', $request->id_event)->sum('quantity');
         $newTicketsTotal = array_sum($request->quantity);
 
         if (($existingTickets + $newTicketsTotal) > $event->capacity) {
@@ -53,7 +53,7 @@ class TicketsController extends Controller
         }
 
         foreach ($request->types as $type) {
-            Tickets::create([
+            Ticket::create([
                 'id_event' => $request->id_event,
                 'type' => $type,
                 'price' => $request->prices[$type] ?? 0,
@@ -71,9 +71,9 @@ class TicketsController extends Controller
      */
     public function show($id)
     {
+        $ticket = Ticket::findOrFail($id);
 
-        // Kirimkan $ticket ke view
-        return view('admin.tickets.view', compact('event'));
+        return redirect()->route('tickets.edit', ['ticket' => $ticket->id_ticket]);
     }
 
 
@@ -83,7 +83,7 @@ class TicketsController extends Controller
     public function edit($id)
     {
 
-        $ticket = Tickets::findOrFail($id);
+        $ticket = Ticket::findOrFail($id);
         $event = Event::findOrFail($ticket->id_event); 
         return view('admin.tickets.edit', compact('ticket', 'event'));
     }
@@ -94,7 +94,7 @@ class TicketsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ticket = Tickets::findOrFail($id);
+        $ticket = Ticket::findOrFail($id);
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -118,7 +118,7 @@ class TicketsController extends Controller
      */
     public function destroy($id)
     {
-        $ticket = Tickets::findOrFail($id);
+        $ticket = Ticket::findOrFail($id);
         $ticket->delete();
 
         return redirect()->route('tickets.index', ['event' => $ticket->id_event])->with('success', 'Ticket Berhasil Dihapus.');

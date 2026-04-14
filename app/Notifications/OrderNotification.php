@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderNotification extends Notification implements ShouldQueue
+class OrderNotification extends Notification
 {
     use Queueable;
 
@@ -29,6 +29,7 @@ class OrderNotification extends Notification implements ShouldQueue
             ->subject('Order Baru Dibuat')
             ->greeting('Halo, Admin!')
             ->line('Order baru telah dibuat oleh ' . ($this->orderDetail['user_name'] ?? 'Pengguna') . '.')
+            ->line('Event: ' . ($this->orderDetail['event_name'] ?? '-'))
             ->line('Detail Order:')
             ->line('ID Order: ' . ($this->orderDetail['id_order'] ?? 'Tidak tersedia'))
             ->line('Jumlah Tiket: ' . ($this->orderDetail['quantity'] ?? 'Tidak tersedia'))
@@ -40,11 +41,11 @@ class OrderNotification extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'order_id' => $this->orderDetail['id_order'] ?? null,
-            'user_name' => $this->orderDetail['user_name'] ?? 'Pengguna',
-            'quantity' => $this->orderDetail['quantity'] ?? 0,
-            'total_price' => $this->orderDetail['total_price'] ?? 0,
-            'message' => 'Order baru telah dibuat oleh ' . ($this->orderDetail['user_name'] ?? 'Pengguna'),
+            'message' => 'Order baru dari ' . $this->orderDetail['user_name'] .
+                ' untuk event "' . $this->orderDetail['event_name'] . '" sebanyak ' .
+                $this->orderDetail['quantity'] . ' tiket. Total: Rp' .
+                number_format($this->orderDetail['total_price'], 0, ',', '.'),
+            'id_order' => $this->orderDetail['id_order'],
         ];
     }
 }

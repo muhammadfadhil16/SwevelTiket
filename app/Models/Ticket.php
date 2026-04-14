@@ -34,4 +34,9 @@ class Ticket extends Model
     {
         return $this->hasMany(Order::class, 'id_ticket', 'id_ticket');
     }
+
+    public function ticketValidation()
+    {
+        return $this->hasMany(TicketValidation::class, 'id_ticket', 'id_ticket');
+    }
 }

@@ -42,7 +42,15 @@ class OrderController extends Controller
             'status' => 'required|in:pending,approved,rejected',
         ]);
 
-        $order = Order::with('ticket', 'user')->findOrFail($id_order);
+        $order = Order::with('ticket', 'user', 'event')->findOrFail($id_order);
+
+        // Cek jika event sudah selesai (misal ada field status atau date)
+        if ($order->event && (
+            (isset($order->event->status) && $order->event->status === 'done') ||
+            (isset($order->event->date) && $order->event->date < now())
+        )) {
+            return redirect()->back()->with('error', 'Status tidak dapat diubah karena event sudah selesai.');
+        }
 
         if ($request->status === 'approved' && $order->status === 'pending') {
             $ticket = $order->ticket;

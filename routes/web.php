@@ -35,7 +35,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // -------------------Admin--------------------------
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
@@ -107,7 +107,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
     Route::post('/order/confirm', [OrderController::class, 'confirm'])->name('order.confirm');
-    Route::get('/order/{id_order}', [OrderController::class, 'ShowEventOrder'])->name('order.ShowEventOrder');
+    Route::get('/order/event/{id_order}', [OrderController::class, 'showEventOrder'])->name('order.ShowEventOrder');
     Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
     Route::get('/order/{order}/edit', [OrderController::class, 'edit'])->name('order.edit');
     Route::put('/order/{order}', [OrderController::class, 'update'])->name('order.update');

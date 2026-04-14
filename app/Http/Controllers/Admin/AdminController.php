@@ -42,7 +42,7 @@ class AdminController extends Controller
 
         // Ambil data event popularity sesuai bulan dan tahun yang dipilih
         $query = Order::select(
-            DB::raw('orders.id_event'),
+            DB::raw('tickets.id_event'),
             DB::raw('events.name as event_name'),
             DB::raw('COUNT(*) as event_count')
         )
@@ -50,10 +50,10 @@ class AdminController extends Controller
             ->join('events', 'tickets.id_event', '=', 'events.id_event')
             ->whereYear('orders.created_at', $selectedYear)
             ->whereMonth('orders.created_at', $selectedMonth)
-            ->groupBy('orders.id_event', 'events.name');
+            ->groupBy('tickets.id_event', 'events.name');
 
         if ($eventFilter) {
-            $query->where('orders.id_event', $eventFilter);
+            $query->where('tickets.id_event', $eventFilter);
         }
 
         $eventPopularity = $query->get();

@@ -7,9 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use \App\Notifications\LoginNotification;
 use \App\Notifications\RegistrationNotification;
-use \App\Notifications\LogoutNotification;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -45,10 +43,10 @@ class AuthController extends Controller
             }
             if ($user->role === 'User') {
                 return redirect()->route('catalogue.index')
-                    ->with(['status' => 'success', 'message' => 'Berhasil login sebagai User!']);
+                    ->with(['status' => 'success', 'message' => 'Selamat datang, ' . $user->name_user ]);
             }
             return redirect()->route('catalogue.index')
-                ->with(['status' => 'success', 'message' => 'Berhasil login!']);
+                ->with(['status' => 'success', 'message' => 'Selamat datang, ' . $user->name_user .'!']);
         }
 
         // Jika gagal
@@ -72,21 +70,18 @@ class AuthController extends Controller
     {
 
         $request->validate([
-            'name_user' => 'required|string',
-            'email_user' => 'required|email|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'role' => 'nullable|in:admin,user',
+            'name_user' => 'required|string|max:255|unique:users,name_user',
+            'email_user' => 'required|string|email|max:255|unique:users,email_user',
+            'password' => 'required|string|min:8|confirmed',
         ]);
-
-
-        $role = $request->role ?? 'User';
 
 
         $user = User::create([
             'name_user' => $request->name_user,
             'email_user' => $request->email_user,
             'password' => Hash::make($request->password),
-            'role' => $role,
+            // Public registration must always create regular users.
+            'role' => 'User',
         ]);
 
         $user->notify(new RegistrationNotification($user->name_user));
@@ -94,7 +89,10 @@ class AuthController extends Controller
         Auth::login($user);
 
 
-        return $this->redirectUserByRole('catalogue.index')->with('status', 'register');
+        return $this->redirectUserByRole('catalogue.index')->with([
+            'status' => 'success',
+            'message' => 'Berhasil mendaftar! Selamat datang, ' . $user->name_user
+        ]);
     }
 
     public function logout(Request $request)
@@ -103,6 +101,9 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('catalogue.index')->with('status', 'logout');
+        return redirect()->route('catalogue.index')->with([
+            'status' => 'error',
+            'message' => 'Berhasil logout!'
+        ]);
     }
 }

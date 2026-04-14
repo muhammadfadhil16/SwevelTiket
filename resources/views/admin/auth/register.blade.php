@@ -23,9 +23,12 @@
                                 <div class="relative w-full">
                                     <input
                                         class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-lg"
-                                        id="name_user" type="text" name="name_user" placeholder="Your Name" required autofocus />
+                                        id="name_user" type="text" name="name_user" placeholder="Your Name" value="{{ old('name_user') }}" required autofocus />
                                 </div>
                             </div>
+                            @error('name_user')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <!-- Input Email -->
@@ -37,9 +40,12 @@
                                 <div class="relative w-full">
                                     <input
                                         class="block w-full border disabled:cursor-not-allowed disabled:opacity-50 bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-lg"
-                                        id="email_user" type="email" name="email_user" placeholder="email@example.com" required />
+                                        id="email_user" type="email" name="email_user" placeholder="email@example.com" value="{{ old('email_user') }}" required />
                                 </div>
                             </div>
+                            @error('email_user')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <!-- Input Password -->
@@ -54,6 +60,9 @@
                                         id="password" type="password" name="password" placeholder="Password" required />
                                 </div>
                             </div>
+                            @error('password')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <!-- Input Konfirmasi Password -->
@@ -68,6 +77,9 @@
                                         id="password_confirmation" type="password" name="password_confirmation" placeholder="Confirm Password" required />
                                 </div>
                             </div>
+                            @error('password_confirmation')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <!-- Tombol Register -->
@@ -91,6 +103,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

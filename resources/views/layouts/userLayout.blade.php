@@ -25,7 +25,7 @@
       <div class="flex items-center justify-between h-16">
         {{-- Logo & Brand --}}
         <a href="{{ route('catalogue.index') }}" class="flex items-center space-x-2">
-          <img src="{{ asset('assets/img/tikettt.png') }}" alt="Tiket Aja" class="h-10 w-auto" />
+          <img src="{{ asset('assets/img/vip.png') }}" alt="Tiket Aja" class="h-10 w-auto" />
           <span class="text-2xl font-bold text-gray-800">Tiket Aja</span>
         </a>
 
@@ -59,6 +59,9 @@
                   <i class="bi bi-person-circle text-2xl"></i>
                 </button>
                 <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden z-50">
+                  <div class="px-4 py-2 border-b text-gray-700 font-semibold">
+                      Hi, {{ Auth::user()->name_user }}
+                  </div>
                 <a href="{{ route('user.orders.index') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">Tiketku</a>
                     <a href="{{ route('user.settings') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">Settings</a>
                     <form action="{{ route('logout') }}" method="POST">
@@ -121,6 +124,11 @@
         <!-- Mobile Nav -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200">
           <nav class="flex flex-col px-6 py-4 space-y-2">
+              @if(Auth::check())
+              <div class="px-4 py-2 border-b text-gray-700 font-semibold">
+                  Hi, {{ Auth::user()->name_user }}
+              </div>
+              @endif
             <a href="{{ route('catalogue.index') }}" class="text-gray-700 hover:text-blue-600">Beranda</a>
             <a href="#" id="mobile-notification-toggle" class="text-gray-700 hover:text-blue-600 flex items-center">
               <i class="bi bi-bell text-lg mr-2"></i> Notifikasi

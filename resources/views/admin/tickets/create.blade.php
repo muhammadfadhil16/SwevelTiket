@@ -15,33 +15,39 @@
                 <label class="block text-gray-700 font-medium mb-2">Pilih Jenis Tiket</label>
 
                 <!-- Regular Ticket -->
-                <div class="flex items-center mb-4">
+                <div class="flex items-center mb-2">
                     <input type="checkbox" name="types[]" value="Regular" id="type_regular" class="form-checkbox h-5 w-5 text-blue-600">
                     <label for="type_regular" class="ml-2 text-gray-700">Regular</label>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mb-4 hidden" id="regular_inputs">
-                    <input type="number" name="prices[Regular]" id="price_regular" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan harga" min="0" disabled>
-                    <input type="number" name="quantity[Regular]" id="quantity_regular" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan kuantitas" min="1" disabled>
+                <div class="mb-4 hidden" id="regular_inputs">
+                    <div class="border border-blue-300 rounded-lg p-4 bg-blue-50 flex flex-col sm:flex-row gap-4">
+                        <input type="number" name="prices[Regular]" id="price_regular" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan harga" min="0" disabled>
+                        <input type="number" name="quantity[Regular]" id="quantity_regular" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan kuantitas" min="1" disabled>
+                    </div>
                 </div>
 
                 <!-- VIP Ticket -->
-                <div class="flex items-center mb-4">
+                <div class="flex items-center mb-2">
                     <input type="checkbox" name="types[]" value="VIP" id="type_vip" class="form-checkbox h-5 w-5 text-blue-600">
                     <label for="type_vip" class="ml-2 text-gray-700">VIP</label>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mb-4 hidden" id="vip_inputs">
-                    <input type="number" name="prices[VIP]" id="price_vip" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan harga" min="0" disabled>
-                    <input type="number" name="quantity[VIP]" id="quantity_vip" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan kuantitas" min="1" disabled>
+                <div class="mb-4 hidden" id="vip_inputs">
+                    <div class="border border-yellow-400 rounded-lg p-4 bg-yellow-50 flex flex-col sm:flex-row gap-4">
+                        <input type="number" name="prices[VIP]" id="price_vip" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan harga" min="0" disabled>
+                        <input type="number" name="quantity[VIP]" id="quantity_vip" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan kuantitas" min="1" disabled>
+                    </div>
                 </div>
 
                 <!-- VVIP Ticket -->
-                <div class="flex items-center mb-4">
+                <div class="flex items-center mb-2">
                     <input type="checkbox" name="types[]" value="VVIP" id="type_vvip" class="form-checkbox h-5 w-5 text-blue-600">
                     <label for="type_vvip" class="ml-2 text-gray-700">VVIP</label>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mb-4 hidden" id="vvip_inputs">
-                    <input type="number" name="prices[VVIP]" id="price_vvip" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan harga" min="0" disabled>
-                    <input type="number" name="quantity[VVIP]" id="quantity_vvip" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan kuantitas" min="1" disabled>
+                <div class="mb-4 hidden" id="vvip_inputs">
+                    <div class="border border-purple-400 rounded-lg p-4 bg-purple-50 flex flex-col sm:flex-row gap-4">
+                        <input type="number" name="prices[VVIP]" id="price_vvip" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan harga" min="0" disabled>
+                        <input type="number" name="quantity[VVIP]" id="quantity_vvip" class="form-input w-full border-gray-300 rounded-md" placeholder="Masukkan kuantitas" min="1" disabled>
+                    </div>
                 </div>
             </div>
 

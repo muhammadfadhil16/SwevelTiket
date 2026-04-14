@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <!-- Pilihan Tahun -->
                 <div>
                     <label for="yearFilter" class="block text-sm font-medium text-gray-700 mb-2">Pilih Tahun:</label>
@@ -49,6 +49,19 @@
                         @foreach($months as $month)
                         <option value="{{ $month }}" {{ request()->get('month') == $month ? 'selected' : '' }}>
                             {{ \Carbon\Carbon::create()->month($month)->format('F') }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- Pilihan Event -->
+                <div>
+                    <label for="eventFilter" class="block text-sm font-medium text-gray-700 mb-2">Pilih Event:</label>
+                    <select id="eventFilter" name="eventFilter" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Semua Event</option>
+                        @foreach($events as $event)
+                        <option value="{{ $event->id_event }}" {{ request()->get('eventFilter') == $event->id_event ? 'selected' : '' }}>
+                            {{ $event->name }}
                         </option>
                         @endforeach
                     </select>

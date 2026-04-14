@@ -78,12 +78,12 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="mb-4">
-                                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                        <input type="text" class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" id="name" name="name" value="{{ $user->name_user }}" required>
+                                        <label for="name_user" class="block text-sm font-medium text-gray-700">Name</label>
+                                        <input type="text" class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" id="name_user" name="name_user" value="{{ $user->name_user }}" required>
                                     </div>
                                     <div class="mb-4">
-                                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                        <input type="email" class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" id="email" name="email" value="{{ $user->email_user }}" required>
+                                        <label for="email_user" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="email" class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" id="email_user" name="email_user" value="{{ $user->email_user }}" required>
                                     </div>
                                     <div class="mb-4">
                                         <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
